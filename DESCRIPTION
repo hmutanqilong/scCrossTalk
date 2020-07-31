@@ -1,0 +1,23 @@
+Package: scCrossTalk
+Type: Package
+Title: Infer cell-cell communications
+Version: 1.0
+Depends: R (>= 3.6.0)
+Author: Xin Shao
+Maintainer: Xin Shao <xin_shao@zju.edu.cn>
+Description: Infer cell-cell communications based on CellTalkDB
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    Seurat (>= 3.0.0),
+    progress,
+    stats,
+    ggplot2,
+    crayon,
+    dplyr,
+    ggpubr,
+    scales,
+    pheatmap,
+    corrplot
