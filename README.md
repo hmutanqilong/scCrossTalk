@@ -32,7 +32,7 @@ clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,
 ```
 ### Plot LR pairs between pairwise clusters
 ```
-PlotPairsNode <- function(clu_pairs = NULL,
+PlotPairsNode <- function(clu_pairs = clu_pairs,
                           show_sig = F,
                           edge_width = 1,
                           edge_alpha = 0.5,
@@ -41,3 +41,19 @@ PlotPairsNode <- function(clu_pairs = NULL,
                           text_size = 3)
 ```
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsNode.svg' width = "600" height = "600">
+
+```
+PlotPairsNet <- function(clu_pairs = clu_pairs,
+                         show_sig = F,
+                         show_clu_node = T,
+                         layout = "nicely",
+                         show_text_cutoff = 0,
+                         node_size_min = 5,
+                         node_size_max = 10,
+                         text_size = 3,
+                         text_col = "black",
+                         edge_width = 0.5,
+                         edge_col = "black",
+                         edge_alpha = 0.2)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsNet.svg' width = "600" height = "600">
