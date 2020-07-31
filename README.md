@@ -40,4 +40,4 @@ PlotPairsNode <- function(clu_pairs = NULL,
                           node_size_max = 10,
                           text_size = 3)
 ```
-<img src='https://github.com/ZJUFanLab/CellTalkDB/blob/master/img/PlotPairsNode.svg' width = "600" height = "600">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsNode.svg' width = "600" height = "600">
