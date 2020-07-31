@@ -72,7 +72,7 @@ PlotPairsHeat(clu_pairs = clu_pairs,
               symbol_col = "black",
               symbol_size = 12)
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsHeat.svg' width = "600">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsHeat.svg' width = "400">
 
 
 
