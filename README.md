@@ -30,4 +30,14 @@ clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,
                        cell_min_pct = 0.25,
                        p_value = 0.05)
 ```
-
+### Plot LR pairs between pairwise clusters
+```
+PlotPairsNode <- function(clu_pairs = NULL,
+                          show_sig = F,
+                          edge_width = 1,
+                          edge_alpha = 0.5,
+                          node_size_min = 1,
+                          node_size_max = 10,
+                          text_size = 3)
+```
+<img src='https://github.com/ZJUFanLab/CellTalkDB/blob/master/img/PlotPairsNode.svg' width = "600" height = "600">
