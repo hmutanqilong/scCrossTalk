@@ -56,4 +56,40 @@ PlotPairsNet <- function(clu_pairs = clu_pairs,
                          edge_col = "black",
                          edge_alpha = 0.2)
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsNet.svg' width = "600" height = "600">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsNet.svg'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
