@@ -158,7 +158,7 @@ PlotCrossTalkHeat(clu_pairs = clu_pairs,
                   symbol_col = "black",
                   symbol_size = 12)
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkHeat.svg' width = "400">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkHeat.svg' width = "600">
 
 ```
 PlotCrossTalkNet(clu_pairs = NULL,
@@ -172,7 +172,7 @@ PlotCrossTalkNet(clu_pairs = NULL,
                  text_size = 3,
                  text_col = "black")
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkNet.svg' width = "500">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkNet.svg' width = "600">
 
 
 
