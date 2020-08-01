@@ -75,7 +75,7 @@ PlotPairsHeat(clu_pairs = clu_pairs,
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsHeat.svg' width = "400">
 
 ```
-PlotPairsBubble(clu_pairs = NULL,
+PlotPairsBubble(clu_pairs = clu_pairs,
                 LR_pairs = "all",
                 show_clusters = "all",
                 if_directed = T, 
@@ -87,8 +87,13 @@ PlotPairsBubble(clu_pairs = NULL,
 ```
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsBubble.svg' width = "600">
 
-
-
+```
+PlotPairsCircle(clu_pairs = clu_pairs,
+                show_sig = F,
+                ligand_clu = "1",
+                receptor_clu = "2")
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "600">
 
 
 

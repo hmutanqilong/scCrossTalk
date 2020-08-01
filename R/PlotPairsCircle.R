@@ -9,13 +9,14 @@
 #' @examples
 #' clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
 #'
-#' PlotPairsViolin(clu_pairs = clu_pairs,
+#' PlotPairsCircle(clu_pairs = clu_pairs,
 #'                 show_sig = T,
 #'                 ligand_clu = '1',
 #'                 receptor_clu = '2')
 #' @return A circle plot of LR pairs between pairwise clusters
 #' @import ggplot2
 #' @importFrom scales hue_pal
+#' @importFrom grDevices colorRampPalette
 #' @export PlotPairsViolin
 
 PlotPairsCircle <- function(clu_pairs = NULL, show_sig = F, ligand_clu = NULL, receptor_clu = NULL){
@@ -68,6 +69,12 @@ PlotPairsCircle <- function(clu_pairs = NULL, show_sig = F, ligand_clu = NULL, r
                   ' to ', receptor_clu))
     }
   }
+  LR_score<- res_pairs$lr_score
+  LR_score_min<- min(LR_score)
+  LR_score_len<-  max(LR_score)-min(LR_score)
+  for (i in 1:length(LR_score)) {
+    LR_score[i] <- (LR_score[i]-LR_score_min)*2/LR_score_len+1
+  }
   res_pairs<- res_pairs[,c("ligand_gene_symbol","receptor_gene_symbol")]
   clu_col <- hue_pal()(length(clu_num_raw))
   clu_col1 <- clu_col[which(clu_num == ligand_clu)]
@@ -80,17 +87,15 @@ PlotPairsCircle <- function(clu_pairs = NULL, show_sig = F, ligand_clu = NULL, r
   chordDiagramFromDataFrame(res_pairs, annotationTrack = "grid", preAllocateTracks = 1, directional = 1,
                             direction.type = "arrows",
                             link.arr.length = 0.12,
-                            link.arr.width = 0.12,link.arr.type = 'triangle',
+                            link.arr.width = 0.12,link.arr.type = 'ellipse',
                             link.arr.lty = par("lty"),
-                            link.arr.lwd = 1, link.arr.col = 'dodgerblue3',
-                            grid.col = clu_col,col='#ADD8E6',big.gap = 5, small.gap = 0.2)
+                            link.arr.lwd = LR_score, link.arr.col = 'royalblue',
+                            grid.col = clu_col,col= 'lightblue', big.gap = 5, small.gap = 0.2)
   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
     xlim = get.cell.meta.data("xlim")
     ylim = get.cell.meta.data("ylim")
     sector.name = get.cell.meta.data("sector.index")
     circos.text(mean(xlim), ylim[1] + .1, sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex=ifelse(nrow(res_pairs)>50, yes = 0.5,no=1))
     circos.axis(h = "top",labels = FALSE,minor.ticks = FALSE, major.at = c(xlim), major.tick.length = 2, sector.index = sector.name, track.index = 2)
-
   }, bg.border = NA)
-
 }
