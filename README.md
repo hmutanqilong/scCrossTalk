@@ -20,7 +20,7 @@ devtools::install_github('ZJUFanLab/scCrossTalk')
 
 # Usage
 `library(scCrossTalk)`
-### Find highly expressed ligand-receptor pairs
+### Find highly expressed ligand-receptor pairs between pairwise clusters
 Find highly expressed ligands and receptors between pairwise clusters using Z score for a `Seurat` object (>= 3.0.0) after log1p normalization, cluster analysis and tSNE or Umap dimensionality reduction
 ```
 clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,
@@ -30,6 +30,18 @@ clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,
                        cell_min_pct = 0.25,
                        p_value = 0.05)
 ```
+
+
+### Find significant LR pairs between pairwise clusters
+```
+PairsSig(clu_pairs = clu_pairs, per_num = 1000, pvalue = 0.05)
+```
+
+### Find significant crosstalk between pairwise clusters
+```
+CrossTalkSig(clu_pairs = clu_pairs, per_num = 1000, pvalue = 0.05)
+```
+
 ### Plot LR pairs between pairwise clusters
 ```
 PlotPairsNode(clu_pairs = clu_pairs,
@@ -93,7 +105,7 @@ PlotPairsCircle(clu_pairs = clu_pairs,
                 ligand_clu = "1",
                 receptor_clu = "2")
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "500">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "600">
 
 ```
 PlotPairsDim(clu_pairs = clu_pairs,
@@ -132,11 +144,35 @@ PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = "score", show_sig = F)
 
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkCircle.svg' width = "600">
 
+```
+PlotCrossTalkHeat(clu_pairs = clu_pairs,
+                  show_type = "number",
+                  if_directed = T,
+                  show_sig = F,
+                  color_low = "white",
+                  color_high = "red",
+                  border_color = "grey60",
+                  cluster_rows = T,
+                  cluster_cols = T,
+                  symbol = "*",
+                  symbol_col = "black",
+                  symbol_size = 12)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkHeat.svg' width = "400">
 
-
-
-
-
+```
+PlotCrossTalkNet(clu_pairs = NULL,
+                 show_type = NULL,
+                 layout = "nicely",
+                 show_sig = F,
+                 edge_col = "black",
+                 edge_alpha = 0.1,
+                 node_size_min = 5,
+                 node_size_max = 10,
+                 text_size = 3,
+                 text_col = "black")
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkNet.svg' width = "500">
 
 
 
