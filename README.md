@@ -123,9 +123,11 @@ PlotPairsViolin(clu_pairs = clu_pairs,
 ```
 PlotCrossTalkSan(clu_pairs = clu_pairs, show_type = "number", show_sig = F)
 ```
+
 <div style="align: center">
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkSan.svg' width = "600">
 </div>
+
 ```
 PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = "score", show_sig = F)
 ```
