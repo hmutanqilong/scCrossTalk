@@ -93,7 +93,7 @@ PlotPairsCircle(clu_pairs = clu_pairs,
                 ligand_clu = "1",
                 receptor_clu = "2")
 ```
-<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "400">
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "500">
 
 ```
 PlotPairsDim(clu_pairs = clu_pairs,
@@ -124,9 +124,7 @@ PlotPairsViolin(clu_pairs = clu_pairs,
 PlotCrossTalkSan(clu_pairs = clu_pairs, show_type = "number", show_sig = F)
 ```
 
-<div align="center">
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkSan.svg' width = "600">
-</div>
 
 ```
 PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = "score", show_sig = F)
