@@ -24,7 +24,7 @@
 #' @importFrom dplyr filter
 #' @export PlotPairsDim
 
-PlotPairsDim <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, receptor = NULL, 
+PlotPairsDim <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, receptor = NULL,
     receptor_clu = NULL, reduction = "umap", size = 1, text_size = 12) {
     # check clu_pairs
     if (is.null(clu_pairs) | !is.list(clu_pairs)) {
@@ -89,19 +89,20 @@ PlotPairsDim <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, rec
     ligand_col <- hue_pal()(length(clu_num))[which(ligand_clu == clu_num)]
     receptor_col <- hue_pal()(length(clu_num))[which(receptor_clu == clu_num)]
     # plotting
-    p_ligand <- ggplot(cell_dim, aes(x = UMAP_1, y = UMAP_2)) + geom_point(data = filter(cell_dim, 
-        cluster == ligand_clu), aes(col = ligand), size = size) + scale_colour_gradient(low = "black", 
-        high = ligand_col) + geom_point(data = filter(cell_dim, cluster != ligand_clu), col = "grey", 
-        size = size) + labs(title = paste0("Cluster ", ligand_clu, ": ", ligand, "(ligand)")) + 
-        theme_bw() + theme(panel.grid = element_blank()) + theme(plot.title = element_text(hjust = 0.5), 
-        legend.justification = c(1, 1), axis.text.x = element_text(size = text_size, color = "black"), 
+    p_ligand <- ggplot(cell_dim, aes(x = UMAP_1, y = UMAP_2))+ geom_point(data = filter(cell_dim, cluster != ligand_clu), col = "grey",
+                                                                          size = size) + geom_point(data = filter(cell_dim,
+        cluster == ligand_clu), aes(col = ligand), size = size) + scale_colour_gradient(low = "black",
+        high = ligand_col)  + labs(title = paste0("Cluster ", ligand_clu, ": ", ligand, "(ligand)")) +
+        theme_bw() + theme(panel.grid = element_blank()) + theme(plot.title = element_text(hjust = 0.5),
+        legend.justification = c(1, 1), axis.text.x = element_text(size = text_size, color = "black"),
         axis.text.y = element_text(size = text_size, color = "black")) + labs(col = "logCount")
-    p_receptor <- ggplot(cell_dim, aes(x = UMAP_1, y = UMAP_2)) + geom_point(data = filter(cell_dim, 
-        cluster == receptor_clu), aes(col = receptor), size = size) + scale_colour_gradient(low = "black", 
-        high = receptor_col) + geom_point(data = filter(cell_dim, cluster != receptor_clu), 
-        col = "grey", size = size) + labs(title = paste0("Cluster ", receptor_clu, ": ", receptor, 
-        "(receptor)")) + theme_bw() + theme(panel.grid = element_blank()) + theme(plot.title = element_text(hjust = 0.5), 
-        legend.justification = c(1, 1), axis.text.x = element_text(size = text_size, color = "black"), 
+    p_receptor <- ggplot(cell_dim, aes(x = UMAP_1, y = UMAP_2))+ geom_point(data = filter(cell_dim, cluster != receptor_clu),
+                                                                            col = "grey", size = size) + geom_point(data = filter(cell_dim,
+        cluster == receptor_clu), aes(col = receptor), size = size) + scale_colour_gradient(low = "black",
+        high = receptor_col) + geom_point(data = filter(cell_dim, cluster != receptor_clu),
+        col = "grey", size = size) + labs(title = paste0("Cluster ", receptor_clu, ": ", receptor,
+        "(receptor)")) + theme_bw() + theme(panel.grid = element_blank()) + theme(plot.title = element_text(hjust = 0.5),
+        legend.justification = c(1, 1), axis.text.x = element_text(size = text_size, color = "black"),
         axis.text.y = element_text(size = text_size, color = "black")) + labs(col = "logCount")
     ggarrange(p_ligand, p_receptor)
 }

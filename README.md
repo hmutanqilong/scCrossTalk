@@ -95,17 +95,40 @@ PlotPairsCircle(clu_pairs = clu_pairs,
 ```
 <img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsCircle.svg' width = "600">
 
+```
+PlotPairsDim(clu_pairs = clu_pairs,
+             ligand = "Apoe",
+             ligand_clu = "4",
+             receptor = "Sdc4",
+             receptor_clu = "2",
+             reduction = "umap",
+             size = 1,
+             text_size = 12)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsDim.svg' width = "800">
 
+```
+PlotPairsViolin(clu_pairs = clu_pairs,
+                ligand = "Apoe",
+                ligand_clu = "4",
+                receptor = "Sdc4",
+                receptor_clu = "2",
+                reduction = "umap",
+                show_jitter = T,
+                jitter_size = 2)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotPairsViolin.svg' width = "400">
 
+### Plot crosstalk between pairwise clusters
+```
+PlotCrossTalkSan(clu_pairs = clu_pairs, show_type = "number", show_sig = F)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkSan.svg' width = "600">
 
-
-
-
-
-
-
-
-
+```
+PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = "score", show_sig = F)
+```
+<img src='https://github.com/ZJUFanLab/scCrossTalk/blob/master/img/PlotCrossTalkCircle.svg' width = "600">
 
 
 
