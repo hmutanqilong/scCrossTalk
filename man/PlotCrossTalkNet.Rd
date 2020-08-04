@@ -4,10 +4,18 @@
 \alias{PlotCrossTalkNet}
 \title{Plot crosstalk between pairwise clusters}
 \usage{
-PlotCrossTalkNet(clu_pairs = NULL, show_type = NULL,
-  layout = "nicely", show_sig = F, edge_col = "black",
-  edge_alpha = 0.1, node_size_min = 5, node_size_max = 10,
-  text_size = 3, text_col = "black")
+PlotCrossTalkNet(
+  clu_pairs = NULL,
+  show_type = NULL,
+  layout = "nicely",
+  show_sig = F,
+  edge_col = "black",
+  edge_alpha = 0.1,
+  node_size_min = 5,
+  node_size_max = 10,
+  text_size = 3,
+  text_col = "black"
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

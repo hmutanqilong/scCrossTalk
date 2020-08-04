@@ -11,10 +11,11 @@
 #'
 #' PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'number')
 #'
-#' PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'score', show_sig = T)
+#' PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'score', show_sig = F)
 #' @return Circle plot of LR pairs between pairwise clusters
 #' @import circlize
 #' @importFrom scales hue_pal
+#' @importFrom graphics par
 #' @export PlotCrossTalkCircle
 
 PlotCrossTalkCircle <- function(clu_pairs = NULL, show_type = NULL, show_sig = F) {
@@ -43,8 +44,7 @@ PlotCrossTalkCircle <- function(clu_pairs = NULL, show_type = NULL, show_sig = F
             plot_res <- clu_crosstalk[, c("cluster1_source", "cluster2_target", "LR_number")]
         }
         if (show_sig == T) {
-            clu_crosstalk <- clu_crosstalk[clu_crosstalk$LR_number_type == "Significant",
-                ]
+            clu_crosstalk <- clu_crosstalk[clu_crosstalk$LR_number_type == "Significant", ]
             if (nrow(clu_crosstalk) == 0) {
                 stop("No significant crosstalk in clu_pairs")
             }
@@ -91,14 +91,14 @@ PlotCrossTalkCircle <- function(clu_pairs = NULL, show_type = NULL, show_sig = F
         plot_clu_col <- c(plot_clu_col, plot_clu_col1)
     }
     chordDiagram(x = plot_res, grid.col = plot_clu_col, preAllocateTracks = 1, transparency = 0.25, directional = 1,
-        direction.type = c("arrows", "diffHeight"), diffHeight = -0.04, annotationTrack = "grid",
-        link.arr.type = "big.arrow", link.sort = TRUE,
-        link.largest.ontop = TRUE)
+        direction.type = c("arrows", "diffHeight"), diffHeight = -0.04, annotationTrack = "grid", link.arr.type = "big.arrow",
+        link.sort = TRUE, link.largest.ontop = TRUE)
     circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-      xlim = get.cell.meta.data("xlim")
-      ylim = get.cell.meta.data("ylim")
-      sector.name = get.cell.meta.data("sector.index")
-      circos.text(mean(xlim), ylim[1] + .1, sector.name, facing = "inside", niceFacing = FALSE, adj = c(0.5, 0),cex=1.5)
-      circos.axis(h = "top",labels = FALSE, major.tick = FALSE,major.tick.percentage = 0.1, sector.index = sector.name, track.index = 2)
+        xlim = get.cell.meta.data("xlim")
+        ylim = get.cell.meta.data("ylim")
+        sector.name = get.cell.meta.data("sector.index")
+        circos.text(mean(xlim), ylim[1] + 0.1, sector.name, facing = "inside", niceFacing = FALSE, adj = c(0.5, 0), cex = 1.5)
+        circos.axis(h = "top", labels = FALSE, major.tick = FALSE, major.tick.percentage = 0.1, sector.index = sector.name,
+            track.index = 2)
     }, bg.border = NA)
 }

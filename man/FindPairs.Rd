@@ -4,30 +4,36 @@
 \alias{FindPairs}
 \title{Find highly expressed ligand-receptor pairs and cell-cell communications for clusters}
 \usage{
-FindPairs(object, species = NULL, use_LRdb = "LRdb", revise_gene = T,
-  cell_min_pct = 0.25, p_value = 0.05)
+FindPairs(
+  object,
+  species = NULL,
+  use_LRdb = "LRdb",
+  revise_gene = T,
+  cell_min_pct = 0.25,
+  p_value = 0.05
+)
 }
 \arguments{
 \item{object}{Seurat object (>= 3.0.0) after log1p normalization and cluster
 analysis. Please ensure data is log1p normalized data and data has been clustered
 before running scCrossTalk pipeline.}
 
-\item{species}{Species of cells. The species must be defined. \code{'Human'} or \code{'Mouse'}.}
+\item{species}{Species of cells. The species must be defined. 'Human' or 'Mouse'}
 
 \item{use_LRdb}{Which ligand-receptor pairs database to ues. Default is
-\code{'LRdb'} using CellTalkDB, namely 3,398 human LR pairs for \code{'Human'};
-2,033 mouse LR pairs for \code{'Mouse'}. See \code{Details} for more available
+'LRdb' using CellTalkDB, namely 3,398 human LR pairs for 'Human';
+2,033 mouse LR pairs for 'Mouse'. See Details for more available
 LR databases or a custom LR database.}
 
 \item{revise_gene}{Whether to revise genes according to NCBI Gene symbols
-(updated in April 28, 2020). Default is \code{TRUE}. When using a custom LR
+(updated in April 28, 2020). Default is TRUE. When using a custom LR
 database for \code{use_LRdb}, please be cautious to decide whether to revise genes}
 
 \item{cell_min_pct}{Include the gene detected in at least this many cells
-in each cluster. Default is \code{0.25}}
+in each cluster. Default is 0.25}
 
 \item{p_value}{Include the significantly highly expressed ligands and receptors
-with this cutoff of p value from Z score. Default is \code{0.05}}
+with this cutoff of p value from Z score. Default is 0.05}
 }
 \value{
 A list include a new data matrix, a data frame containing highly expressed
@@ -35,9 +41,9 @@ ligand-receptor pairs, and two data frames containing sum of LR pairs and
 scores between pairwise clusters, respectively.
 }
 \description{
-Find highly expressed ligands and receptors between pairwise clusters using Z score for a \code{Seurat}
-object (>= 3.0.0) after \code{log1p} normalization, \code{cluster analysis}
-and \code{tSNE} or \code{Umap} dimensionality reduction, followed by inferring significant
+Find highly expressed ligands and receptors between pairwise clusters using Z score for a Seurat
+object (>= 3.0.0) after log1p normalization, cluster analysis
+and tSNE or Umap dimensionality reduction, followed by inferring significant
 LR pairs and cell-cell communication with permutation test.
 }
 \details{

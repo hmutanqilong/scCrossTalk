@@ -22,8 +22,8 @@
 #' @importFrom scales hue_pal
 #' @export PlotPairsViolin
 
-PlotPairsViolin <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, receptor = NULL, 
-    receptor_clu = NULL, show_jitter = T, jitter_size = 2) {
+PlotPairsViolin <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, receptor = NULL, receptor_clu = NULL, 
+    show_jitter = T, jitter_size = 2) {
     # check clu_pairs
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -64,12 +64,10 @@ PlotPairsViolin <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, 
         stop("No available LR pairs in the result of clu_pairs")
     }
     # check ligand and receptor
-    res_pairs1 <- paste0(res_pairs$ligand_gene_symbol, res_pairs$ligand_clu, res_pairs$receptor_gene_symbol, 
-        res_pairs$receptor_clu)
+    res_pairs1 <- paste0(res_pairs$ligand_gene_symbol, res_pairs$ligand_clu, res_pairs$receptor_gene_symbol, res_pairs$receptor_clu)
     input_pair <- paste0(ligand, ligand_clu, receptor, receptor_clu)
     if (!input_pair %in% res_pairs1) {
-        stop(paste0("No available LR pair in the result of clu_pairs from ", ligand_clu, " to ", 
-            receptor_clu))
+        stop(paste0("No available LR pair in the result of clu_pairs from ", ligand_clu, " to ", receptor_clu))
     }
     ndata1 <- ndata[, clu_info[clu_info$cluster == ligand_clu, ]$cell]
     ndata2 <- ndata[, clu_info[clu_info$cluster == receptor_clu, ]$cell]
@@ -93,8 +91,8 @@ PlotPairsViolin <- function(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL, 
         jitter_alpha <- 0
         violin_alpha <- 1
     }
-    ggplot(res_plot, aes(x = LR, y = logCount, fill = cluster)) + geom_jitter(alpha = jitter_alpha, 
-        size = jitter_size) + geom_violin(alpha = violin_alpha) + scale_fill_manual(values = c(clu_col1, 
-        clu_col2)) + theme_bw() + theme(panel.grid = element_blank(), axis.text.x = element_text(color = "black", 
-        size = 12), axis.text.y = element_text(color = "black", size = 12), axis.title.x = element_blank())
+    ggplot(res_plot, aes(x = LR, y = logCount, fill = cluster)) + geom_jitter(alpha = jitter_alpha, size = jitter_size) + 
+        geom_violin(alpha = violin_alpha) + scale_fill_manual(values = c(clu_col1, clu_col2)) + theme_bw() + theme(panel.grid = element_blank(), 
+        axis.text.x = element_text(color = "black", size = 12), axis.text.y = element_text(color = "black", size = 12), 
+        axis.title.x = element_blank())
 }

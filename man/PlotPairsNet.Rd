@@ -4,10 +4,20 @@
 \alias{PlotPairsNet}
 \title{Plot LR pairs between pairwise clusters}
 \usage{
-PlotPairsNet(clu_pairs = NULL, show_sig = F, show_clu_node = T,
-  layout = "nicely", show_text_cutoff = 0, node_size_min = 5,
-  node_size_max = 10, text_size = 3, text_col = "black",
-  edge_width = 0.5, edge_col = "black", edge_alpha = 0.2)
+PlotPairsNet(
+  clu_pairs = NULL,
+  show_sig = F,
+  show_clu_node = T,
+  layout = "kk",
+  show_text_cutoff = 0,
+  node_size_min = 5,
+  node_size_max = 10,
+  text_size = 3,
+  text_col = "black",
+  edge_width = 0.5,
+  edge_col = "black",
+  edge_alpha = 0.2
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}
@@ -17,8 +27,8 @@ To show significant LR pairs, please run \code{\link{PairsSig}}}
 
 \item{show_clu_node}{Whether to show cluster nodes. Default is TRUE}
 
-\item{layout}{Layout of net plot, e.g., 'fr','mds',''randomly','dh',
-'gem','graphopt','grid','sphere','kk','lgl'. Default is 'nicely'}
+\item{layout}{Layout of net plot, e.g., 'nicely','fr','mds',''randomly','dh',
+'gem','graphopt','grid','sphere','kk','lgl'. Default is 'kk'}
 
 \item{show_text_cutoff}{Cutoff to show text label. Default is 0, namely to show all texts}
 

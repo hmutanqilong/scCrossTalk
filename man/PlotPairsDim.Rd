@@ -4,9 +4,16 @@
 \alias{PlotPairsDim}
 \title{Plot a LR pair between pairwise clusters}
 \usage{
-PlotPairsDim(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL,
-  receptor = NULL, receptor_clu = NULL, reduction = "umap",
-  size = 1, text_size = 12)
+PlotPairsDim(
+  clu_pairs = NULL,
+  ligand = NULL,
+  ligand_clu = NULL,
+  receptor = NULL,
+  receptor_clu = NULL,
+  reduction = "umap",
+  size = 1,
+  text_size = 12
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

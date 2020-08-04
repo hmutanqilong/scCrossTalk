@@ -6,7 +6,7 @@
 #' Input 'number' to show sum of LR pairs number; Input 'score' to show sum of LR pairs score
 #' @param if_directed Considering the direction of LR pairs between two clusters. Default is TRUE
 #' @param show_sig Whether to show significant crosstalk between pairwise clusters. Default is FALSE
-#' To show significant crosstalk, please run \code{\link{FindCrossTalk}}
+#' To show significant crosstalk, please run \code{\link{CrossTalkSig}}
 #' @param color_low Color of the lowest score. Default is 'white'
 #' @param color_high Color of the highest score. Default is 'red'
 #' @param border_color Color of cell borders on heatmap, use NA if no border should be drawn.Default is 'grey60'
@@ -27,9 +27,9 @@
 #' @import pheatmap
 #' @export PlotCrossTalkHeat
 
-PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = T, show_sig = F, 
-    color_low = "white", color_high = "red", border_color = "grey60", cluster_rows = T, cluster_cols = T, 
-    symbol = "*", symbol_col = "black", symbol_size = 12) {
+PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = T, show_sig = F, color_low = "white", 
+    color_high = "red", border_color = "grey60", cluster_rows = T, cluster_cols = T, symbol = "*", symbol_col = "black", 
+    symbol_size = 12) {
     # check clu_pairs
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -75,8 +75,7 @@ PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = 
                 clu_clu_name <- paste(rownames(cc_pairs)[i], colnames(cc_pairs)[j], sep = "_")
                 if (if_directed == F) {
                   if (clu_clu_name %in% clu_crosstalk_undir$clu1_clu2) {
-                    clu_crosstalk_undir1 <- clu_crosstalk_undir[clu_crosstalk_undir$clu1_clu2 == 
-                      clu_clu_name, ]
+                    clu_crosstalk_undir1 <- clu_crosstalk_undir[clu_crosstalk_undir$clu1_clu2 == clu_clu_name, ]
                     cc_pairs[i, j] <- clu_crosstalk_undir1$LR_number
                     cc_pairs[j, i] <- clu_crosstalk_undir1$LR_number
                     if (show_sig == T) {
@@ -91,8 +90,7 @@ PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = 
                 }
                 if (if_directed == T) {
                   if (clu_clu_name %in% clu_crosstalk$clu1_clu2) {
-                    clu_crosstalk1 <- clu_crosstalk[clu_crosstalk$clu1_clu2 == clu_clu_name, 
-                      ]
+                    clu_crosstalk1 <- clu_crosstalk[clu_crosstalk$clu1_clu2 == clu_clu_name, ]
                     cc_pairs[i, j] <- clu_crosstalk1$LR_number
                     if (show_sig == T) {
                       cc_pairs_sig[i, j] <- ""
@@ -117,8 +115,7 @@ PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = 
                 clu_clu_name <- paste(rownames(cc_pairs)[i], colnames(cc_pairs)[j], sep = "_")
                 if (if_directed == F) {
                   if (clu_clu_name %in% clu_crosstalk_undir$clu1_clu2) {
-                    clu_crosstalk_undir1 <- clu_crosstalk_undir[clu_crosstalk_undir$clu1_clu2 == 
-                      clu_clu_name, ]
+                    clu_crosstalk_undir1 <- clu_crosstalk_undir[clu_crosstalk_undir$clu1_clu2 == clu_clu_name, ]
                     cc_pairs[i, j] <- clu_crosstalk_undir1$LR_score
                     cc_pairs[j, i] <- clu_crosstalk_undir1$LR_score
                     if (show_sig == T) {
@@ -133,8 +130,7 @@ PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = 
                 }
                 if (if_directed == T) {
                   if (clu_clu_name %in% clu_crosstalk$clu1_clu2) {
-                    clu_crosstalk1 <- clu_crosstalk[clu_crosstalk$clu1_clu2 == clu_clu_name, 
-                      ]
+                    clu_crosstalk1 <- clu_crosstalk[clu_crosstalk$clu1_clu2 == clu_clu_name, ]
                     cc_pairs[i, j] <- clu_crosstalk1$LR_score
                     if (show_sig == T) {
                       cc_pairs_sig[i, j] <- ""
@@ -148,14 +144,12 @@ PlotCrossTalkHeat <- function(clu_pairs = NULL, show_type = NULL, if_directed = 
         }
     }
     if (show_sig == T) {
-        pheatmap(mat = cc_pairs, color = colorRampPalette(c(color_low, color_high))(100), 
-            border_color = border_color, cluster_rows = cluster_rows, cluster_cols = cluster_cols, 
-            main = main_title, fontsize = 12, angle_col = 0, display_numbers = as.matrix(cc_pairs_sig), 
-            number_color = symbol_col, fontsize_number = symbol_size)
+        pheatmap(mat = cc_pairs, color = colorRampPalette(c(color_low, color_high))(100), border_color = border_color, 
+            cluster_rows = cluster_rows, cluster_cols = cluster_cols, main = main_title, fontsize = 12, angle_col = 0, 
+            display_numbers = as.matrix(cc_pairs_sig), number_color = symbol_col, fontsize_number = symbol_size)
     }
     if (show_sig == F) {
-        pheatmap(mat = cc_pairs, color = colorRampPalette(c(color_low, color_high))(100), 
-            border_color = border_color, cluster_rows = cluster_rows, cluster_cols = cluster_cols, 
-            main = main_title, fontsize = 12, angle_col = 0)
+        pheatmap(mat = cc_pairs, color = colorRampPalette(c(color_low, color_high))(100), border_color = border_color, 
+            cluster_rows = cluster_rows, cluster_cols = cluster_cols, main = main_title, fontsize = 12, angle_col = 0)
     }
 }

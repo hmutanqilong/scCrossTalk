@@ -4,8 +4,12 @@
 \alias{PlotPairsCircle}
 \title{Plot LR pairs between pairwise clusters}
 \usage{
-PlotPairsCircle(clu_pairs = NULL, show_sig = F, ligand_clu = NULL,
-  receptor_clu = NULL)
+PlotPairsCircle(
+  clu_pairs = NULL,
+  show_sig = F,
+  ligand_clu = NULL,
+  receptor_clu = NULL
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}
@@ -26,7 +30,7 @@ Plot LR pairs between pairwise clusters with a circle plot of LR pairs between p
 \examples{
 clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
 
-PlotPairsViolin(clu_pairs = clu_pairs,
+PlotPairsCircle(clu_pairs = clu_pairs,
                 show_sig = T,
                 ligand_clu = '1',
                 receptor_clu = '2')

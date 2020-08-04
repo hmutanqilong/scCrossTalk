@@ -36,9 +36,9 @@
 #' @importFrom grDevices colorRampPalette
 #' @export PlotPairsHeat
 
-PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "all", show_sig = F,
-    color_low = "white", color_high = "red", border_color = "grey60", cluster_rows = T, cluster_cols = T,
-    symbol = "*", symbol_col = "black", symbol_size = 12) {
+PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "all", show_sig = F, color_low = "white", 
+    color_high = "red", border_color = "grey60", cluster_rows = T, cluster_cols = T, symbol = "*", symbol_col = "black", 
+    symbol_size = 12) {
     # check
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -97,8 +97,7 @@ PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "a
             }
             stop(paste0(show_clusters1, ": not in clusters of clu_pairs list!"))
         }
-        res_pairs <- res_pairs[res_pairs$ligand_clu %in% show_clusters | res_pairs$receptor_clu %in%
-            show_clusters, ]
+        res_pairs <- res_pairs[res_pairs$ligand_clu %in% show_clusters | res_pairs$receptor_clu %in% show_clusters, ]
         lr_pairs <- unique(res_pairs$lr_pair)
     }
     lr_pairs <- unique(res_pairs$lr_pair)
@@ -128,8 +127,7 @@ PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "a
     clu_plot <- as.data.frame(matrix(0, nrow = length(lr_pairs), ncol = length(clu_clu)))
     colnames(clu_plot) <- clu_clu
     rownames(clu_plot) <- lr_pairs
-    clu_plot_sig <- as.data.frame(matrix("", nrow = length(lr_pairs), ncol = length(clu_clu)),
-        stringsAsFactors = F)
+    clu_plot_sig <- as.data.frame(matrix("", nrow = length(lr_pairs), ncol = length(clu_clu)), stringsAsFactors = F)
     colnames(clu_plot_sig) <- clu_clu
     rownames(clu_plot_sig) <- lr_pairs
     for (i in 1:ncol(clu_plot)) {
@@ -139,9 +137,9 @@ PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "a
             for (j in 1:nrow(res_pairs1)) {
                 clu_plot[res_pairs1$lr_pair[j], i] <- res_pairs1$lr_score[j]
                 if (show_sig == T) {
-                    if (res_pairs1$type[j] == "Significant") {
-                        clu_plot_sig[res_pairs1$lr_pair[j], i] <- symbol
-                    }
+                  if (res_pairs1$type[j] == "Significant") {
+                    clu_plot_sig[res_pairs1$lr_pair[j], i] <- symbol
+                  }
                 }
             }
         }
@@ -157,12 +155,12 @@ PlotPairsHeat <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "a
     rownames(clu_plot) <- lr_pairs
     # plot
     if (show_sig == T) {
-        pheatmap(mat = clu_plot, color = colorRampPalette(c(color_low, color_high))(50), border_color = border_color,
-            cluster_rows = cluster_rows, cluster_cols = cluster_cols, display_numbers = as.matrix(clu_plot_sig),
-            number_color = symbol_col, fontsize_number = symbol_size)
+        pheatmap(mat = clu_plot, color = colorRampPalette(c(color_low, color_high))(50), border_color = border_color, 
+            cluster_rows = cluster_rows, cluster_cols = cluster_cols, display_numbers = as.matrix(clu_plot_sig), number_color = symbol_col, 
+            fontsize_number = symbol_size)
     }
     if (show_sig == F) {
-        pheatmap(mat = clu_plot, color = colorRampPalette(c(color_low, color_high))(50), border_color = border_color,
+        pheatmap(mat = clu_plot, color = colorRampPalette(c(color_low, color_high))(50), border_color = border_color, 
             cluster_rows = cluster_rows, cluster_cols = cluster_cols)
     }
 }

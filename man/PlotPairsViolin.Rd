@@ -4,9 +4,15 @@
 \alias{PlotPairsViolin}
 \title{Plot a LR pair between pairwise clusters}
 \usage{
-PlotPairsViolin(clu_pairs = NULL, ligand = NULL, ligand_clu = NULL,
-  receptor = NULL, receptor_clu = NULL, show_jitter = T,
-  jitter_size = 2)
+PlotPairsViolin(
+  clu_pairs = NULL,
+  ligand = NULL,
+  ligand_clu = NULL,
+  receptor = NULL,
+  receptor_clu = NULL,
+  show_jitter = T,
+  jitter_size = 2
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

@@ -4,13 +4,15 @@
 #' @param clu_pairs A list generated from \code{\link{FindPairs}}
 #' @param per_num Number of repeat times for permutation test. Default is 1000
 #' @param pvalue Include the significantly highly expressed LR pairs
-#' with this cutoff of p value from permutation test. Default is \code{0.05}.
+#' with this cutoff of p value from permutation test. Default is 0.05
 #' @return The same list containing the significant LR pairs stored
-#' in \code{clu_pairs}. For p value, 0 means p < 1/per_num, namely p < 0.001 by default.
+#' in \code{clu_pairs}. For p value, 0 means p < 1/per_num, namely p < 0.001 by default
+#' @examples clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
+#' clu_pairs <- PairsSig(clu_pairs = clu_pairs, per_num = 100)
 #' @import progress
 #' @importFrom crayon red cyan green
 #' @export PairsSig
-#' @examples clu_pairs <- PairsSig(clu_pairs = FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse'))
+
 
 PairsSig <- function(clu_pairs = NULL, per_num = 1000, pvalue = 0.05) {
     # check clu_pairs
@@ -33,8 +35,8 @@ PairsSig <- function(clu_pairs = NULL, per_num = 1000, pvalue = 0.05) {
     Sys.sleep(2)
     cat(red("Note: this process might take a long time"))
     Sys.sleep(2)
-    pb <- progress_bar$new(format = "[:bar] Finished::percent Remaining::eta", total = per_num, 
-        clear = FALSE, width = 60, complete = "+", incomplete = "-")
+    pb <- progress_bar$new(format = "[:bar] Finished::percent Remaining::eta", total = per_num, clear = FALSE, width = 60,
+        complete = "+", incomplete = "-")
     ndata <- clu_pairs[["ndata"]]
     clu_info <- clu_pairs[["clu_info"]]
     res_pairs <- clu_pairs[["clu_pairs"]]
@@ -49,8 +51,7 @@ PairsSig <- function(clu_pairs = NULL, per_num = 1000, pvalue = 0.05) {
     # clu_pair
     clu_pair <- NULL
     for (i in 1:length(clu_num)) {
-        d1 <- data.frame(cluster1 = rep(clu_num[i], length(clu_num)), cluster2 = clu_num, 
-            stringsAsFactors = F)
+        d1 <- data.frame(cluster1 = rep(clu_num[i], length(clu_num)), cluster2 = clu_num, stringsAsFactors = F)
         clu_pair <- rbind(clu_pair, d1)
     }
     clu_pair$clu1_clu2 <- paste(clu_pair$cluster1, clu_pair$cluster2, sep = "_")
@@ -71,18 +72,15 @@ PairsSig <- function(clu_pairs = NULL, per_num = 1000, pvalue = 0.05) {
             clu_pair1 <- clu_pair[i, ]
             if (clu_pair1$clu1_clu2 %in% res_pairs$clu1_clu2) {
                 res_pairs1 <- res_pairs[res_pairs$clu1_clu2 == clu_pair1$clu1_clu2, ]
-                ndata1 <- ndata[, clu_info_per[clu_info_per$cluster == clu_pair1$cluster1, 
-                  ]$cell]
-                ndata2 <- ndata[, clu_info_per[clu_info_per$cluster == clu_pair1$cluster2, 
-                  ]$cell]
+                ndata1 <- ndata[, clu_info_per[clu_info_per$cluster == clu_pair1$cluster1, ]$cell]
+                ndata2 <- ndata[, clu_info_per[clu_info_per$cluster == clu_pair1$cluster2, ]$cell]
                 ndata1 <- ndata1[rownames(ndata1) %in% res_pairs1$ligand_gene_symbol, ]
                 ndata2 <- ndata2[rownames(ndata2) %in% res_pairs1$receptor_gene_symbol, ]
                 ndata1 <- as.data.frame(t(as.matrix(ndata1)))
                 ndata2 <- as.data.frame(t(as.matrix(ndata2)))
                 ndata1 <- ndata1[, res_pairs1$ligand_gene_symbol]
                 ndata2 <- ndata2[, res_pairs1$receptor_gene_symbol]
-                score_per1 <- as.numeric(apply(ndata1, 2, mean)) * as.numeric(apply(ndata2, 
-                  2, mean))
+                score_per1 <- as.numeric(apply(ndata1, 2, mean)) * as.numeric(apply(ndata2, 2, mean))
                 score_per <- c(score_per, score_per1)
             }
         }

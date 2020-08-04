@@ -4,10 +4,17 @@
 \alias{PlotPairsBubble}
 \title{Plot LR pairs between pairwise clusters}
 \usage{
-PlotPairsBubble(clu_pairs = NULL, LR_pairs = "all",
-  show_clusters = "all", if_directed = T, show_sig = F,
-  bubble_col = "black", bubble_alpha = 0.6, bubble_max_size = 20,
-  show_text_cutoff = 1)
+PlotPairsBubble(
+  clu_pairs = NULL,
+  LR_pairs = "all",
+  show_clusters = "all",
+  if_directed = T,
+  show_sig = F,
+  bubble_col = "black",
+  bubble_alpha = 0.6,
+  bubble_max_size = 20,
+  show_text_cutoff = 1
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

@@ -5,8 +5,8 @@
 #' @param show_sig Whether to show significant highly expressed LR pairs between pairwise clusters. Default is FALSE
 #' To show significant LR pairs, please run \code{\link{PairsSig}}
 #' @param show_clu_node Whether to show cluster nodes. Default is TRUE
-#' @param layout Layout of net plot, e.g., 'fr','mds',''randomly','dh',
-#' 'gem','graphopt','grid','sphere','kk','lgl'. Default is 'nicely'
+#' @param layout Layout of net plot, e.g., 'nicely','fr','mds',''randomly','dh',
+#' 'gem','graphopt','grid','sphere','kk','lgl'. Default is 'kk'
 #' @param show_text_cutoff Cutoff to show text label. Default is 0, namely to show all texts
 #' @param node_size_min Minimum size of node. Default is 5
 #' @param node_size_max Maximum size of node. Default is 10
@@ -27,9 +27,8 @@
 #' @importFrom igraph graph_from_data_frame
 #' @export PlotPairsNet
 
-PlotPairsNet <- function(clu_pairs = NULL, show_sig = F, show_clu_node = T, layout = "nicely", 
-    show_text_cutoff = 0, node_size_min = 5, node_size_max = 10, text_size = 3, text_col = "black", 
-    edge_width = 0.5, edge_col = "black", edge_alpha = 0.2) {
+PlotPairsNet <- function(clu_pairs = NULL, show_sig = F, show_clu_node = T, layout = "kk", show_text_cutoff = 0, node_size_min = 5, 
+    node_size_max = 10, text_size = 3, text_col = "black", edge_width = 0.5, edge_col = "black", edge_alpha = 0.2) {
     # check
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -81,14 +80,11 @@ PlotPairsNet <- function(clu_pairs = NULL, show_sig = F, show_clu_node = T, layo
         stop("Please input the right edge_alpha (number, >0)")
     }
     # check layout
-    if (!layout %in% c("nicely", "mds", "fr", "randomly", "dh", "gem", "graphopt", "grid", 
-        "sphere", "kk", "lgl")) {
+    if (!layout %in% c("nicely", "mds", "fr", "randomly", "dh", "gem", "graphopt", "grid", "sphere", "kk", "lgl")) {
         stop("Please input the right layout, 'nicely','mds','fr','randomly', etc.")
     }
-    res_pairs$ligand_gene_symbol <- paste0(res_pairs$ligand_gene_symbol, "(", res_pairs$ligand_clu, 
-        "L)")
-    res_pairs$receptor_gene_symbol <- paste0(res_pairs$receptor_gene_symbol, "(", res_pairs$receptor_clu, 
-        "R)")
+    res_pairs$ligand_gene_symbol <- paste0(res_pairs$ligand_gene_symbol, "(", res_pairs$ligand_clu, "L)")
+    res_pairs$receptor_gene_symbol <- paste0(res_pairs$receptor_gene_symbol, "(", res_pairs$receptor_clu, "R)")
     pairs_sig <- 1:nrow(res_pairs)
     if (show_sig == T) {
         pairs_sig <- which(res_pairs$type == "Significant")
@@ -143,8 +139,7 @@ PlotPairsNet <- function(clu_pairs = NULL, show_sig = F, show_clu_node = T, layo
     clu_num2 <- clu_num2[order(clu_num2)]
     clu_num <- c(clu_num1, clu_num2)
     if (show_clu_node == T) {
-        plot_res1 <- data.frame(name = clu_num, size = max(plot_res$size + 1), cluster = clu_num, 
-            stringsAsFactors = F)
+        plot_res1 <- data.frame(name = clu_num, size = max(plot_res$size + 1), cluster = clu_num, stringsAsFactors = F)
         plot_res <- rbind(plot_res, plot_res1)
     }
     plot_res$cluster <- factor(plot_res$cluster, levels = clu_num)
@@ -157,12 +152,10 @@ PlotPairsNet <- function(clu_pairs = NULL, show_sig = F, show_clu_node = T, layo
         plot_clu_col <- c(plot_clu_col, plot_clu_col1)
     }
     mygraph <- graph_from_data_frame(plot_res_con, vertices = plot_res, directed = FALSE)
-    ggraph(mygraph, layout = layout) + geom_edge_link(edge_colour = edge_col, edge_alpha = edge_alpha, 
-        edge_width = edge_width) + geom_node_point(aes(size = size, fill = cluster), shape = 21, 
-        color = "black", alpha = 0.9) + scale_size_continuous(range = c(node_size_min, node_size_max)) + 
-        scale_fill_manual(values = plot_clu_col) + geom_node_text(aes(label = ifelse(size > 
-        show_text_cutoff, as.character(name), "")), size = text_size, color = text_col) + 
-        expand_limits(x = c(-1.2, 1.2), y = c(-1.2, 1.2)) + theme_minimal() + theme(legend.position = "none", 
-        panel.grid = element_blank(), axis.line = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank(), axis.title = element_blank())
+    ggraph(mygraph, layout = layout) + geom_edge_link(edge_colour = edge_col, edge_alpha = edge_alpha, edge_width = edge_width) + 
+        geom_node_point(aes(size = size, fill = cluster), shape = 21, color = "black", alpha = 0.9) + scale_size_continuous(range = c(node_size_min, 
+        node_size_max)) + scale_fill_manual(values = plot_clu_col) + geom_node_text(aes(label = ifelse(size > show_text_cutoff, 
+        as.character(name), "")), size = text_size, color = text_col) + expand_limits(x = c(-1.2, 1.2), y = c(-1.2, 1.2)) + 
+        theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.line = element_blank(), 
+        axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank())
 }

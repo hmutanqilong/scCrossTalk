@@ -4,11 +4,20 @@
 \alias{PlotPairsHeat}
 \title{Plot LR pairs between pairwise clusters}
 \usage{
-PlotPairsHeat(clu_pairs = NULL, LR_pairs = "all",
-  show_clusters = "all", show_sig = F, color_low = "white",
-  color_high = "red", border_color = "grey60", cluster_rows = T,
-  cluster_cols = T, symbol = "*", symbol_col = "black",
-  symbol_size = 12)
+PlotPairsHeat(
+  clu_pairs = NULL,
+  LR_pairs = "all",
+  show_clusters = "all",
+  show_sig = F,
+  color_low = "white",
+  color_high = "red",
+  border_color = "grey60",
+  cluster_rows = T,
+  cluster_cols = T,
+  symbol = "*",
+  symbol_col = "black",
+  symbol_size = 12
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

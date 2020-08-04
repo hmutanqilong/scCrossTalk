@@ -23,8 +23,8 @@
 #' @importFrom ggrepel geom_text_repel
 #' @export PlotPairsBubble
 
-PlotPairsBubble <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "all", if_directed = T, 
-    show_sig = F, bubble_col = "black", bubble_alpha = 0.6, bubble_max_size = 20, show_text_cutoff = 1) {
+PlotPairsBubble <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = "all", if_directed = T, show_sig = F, 
+    bubble_col = "black", bubble_alpha = 0.6, bubble_max_size = 20, show_text_cutoff = 1) {
     # check
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -50,8 +50,7 @@ PlotPairsBubble <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = 
             }
             stop(paste0(show_clusters1, ": not in clusters of clu_pairs list!"))
         }
-        res_pairs <- res_pairs[res_pairs$ligand_clu %in% show_clusters | res_pairs$receptor_clu %in% 
-            show_clusters, ]
+        res_pairs <- res_pairs[res_pairs$ligand_clu %in% show_clusters | res_pairs$receptor_clu %in% show_clusters, ]
         lr_pairs <- unique(res_pairs$lr_pair)
     }
     # check LR_pairs
@@ -91,11 +90,10 @@ PlotPairsBubble <- function(clu_pairs = NULL, LR_pairs = "all", show_clusters = 
         res_pairs$clu_clu <- apply(res_pairs[, c("ligand_clu", "receptor_clu")], 1, clu_sort)
     }
     text_label <- ifelse(res_pairs$lr_score > show_text_cutoff, res_pairs$lr_pair, "")
-    ggplot(data = res_pairs, aes(x = ligand_exp_avg, y = receptor_exp_avg)) + geom_point(aes(size = lr_score, 
-        fill = clu_clu), shape = 21, colour = bubble_col, alpha = bubble_alpha) + geom_text_repel(label = text_label) + 
-        scale_size_area(max_size = bubble_max_size) + guides(size = guide_legend((title = "LR score")), 
-        fill = guide_legend((title = "Crosstalk"))) + theme(legend.text = element_text(size = 10, 
+    ggplot(data = res_pairs, aes(x = ligand_exp_avg, y = receptor_exp_avg)) + geom_point(aes(size = lr_score, fill = clu_clu), 
+        shape = 21, colour = bubble_col, alpha = bubble_alpha) + geom_text_repel(label = text_label) + scale_size_area(max_size = bubble_max_size) + 
+        guides(size = guide_legend((title = "LR score")), fill = guide_legend((title = "Crosstalk"))) + theme(legend.text = element_text(size = 10, 
         color = "black"), axis.title = element_text(size = 10, color = "black"), axis.text = element_text(size = 10, 
-        color = "black"), legend.position = "right") + xlab("logCount (ligand average expression)") + 
-        ylab("logCount (receptor average expression)") + theme_bw() + theme(panel.grid = element_blank())
+        color = "black"), legend.position = "right") + xlab("logCount (ligand average expression)") + ylab("logCount (receptor average expression)") + 
+        theme_bw() + theme(panel.grid = element_blank())
 }

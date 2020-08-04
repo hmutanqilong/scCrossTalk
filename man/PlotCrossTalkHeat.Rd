@@ -4,11 +4,20 @@
 \alias{PlotCrossTalkHeat}
 \title{Plot crosstalk between pairwise clusters}
 \usage{
-PlotCrossTalkHeat(clu_pairs = NULL, show_type = NULL,
-  if_directed = T, show_sig = F, color_low = "white",
-  color_high = "red", border_color = "grey60", cluster_rows = T,
-  cluster_cols = T, symbol = "*", symbol_col = "black",
-  symbol_size = 12)
+PlotCrossTalkHeat(
+  clu_pairs = NULL,
+  show_type = NULL,
+  if_directed = T,
+  show_sig = F,
+  color_low = "white",
+  color_high = "red",
+  border_color = "grey60",
+  cluster_rows = T,
+  cluster_cols = T,
+  symbol = "*",
+  symbol_col = "black",
+  symbol_size = 12
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}
@@ -19,7 +28,7 @@ Input 'number' to show sum of LR pairs number; Input 'score' to show sum of LR p
 \item{if_directed}{Considering the direction of LR pairs between two clusters. Default is TRUE}
 
 \item{show_sig}{Whether to show significant crosstalk between pairwise clusters. Default is FALSE
-To show significant crosstalk, please run \code{\link{FindCrossTalk}}}
+To show significant crosstalk, please run \code{\link{CrossTalkSig}}}
 
 \item{color_low}{Color of the lowest score. Default is 'white'}
 

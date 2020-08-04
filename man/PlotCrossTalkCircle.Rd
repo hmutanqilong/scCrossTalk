@@ -26,5 +26,5 @@ clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat, species = 'Mouse')
 
 PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'number')
 
-PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'score', show_sig = T)
+PlotCrossTalkCircle(clu_pairs = clu_pairs, show_type = 'score', show_sig = F)
 }

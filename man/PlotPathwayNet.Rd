@@ -2,12 +2,26 @@
 % Please edit documentation in R/PlotPathwayNet.R
 \name{PlotPathwayNet}
 \alias{PlotPathwayNet}
-\title{Plot pathways between pairwise clusters}
+\title{Plot pathways of target cluster from source cluster}
 \usage{
-PlotPathwayNet(clu_pairs = NULL, show_sig = F, show_clu_node = T,
-  layout = "nicely", show_text_cutoff = 0, node_size_min = 5,
-  node_size_max = 10, text_size = 3, text_col = "black",
-  edge_width = 0.5, edge_col = "black", edge_alpha = 0.2)
+PlotPathwayNet(
+  clu_pairs = NULL,
+  show_sig = F,
+  layout = "kk",
+  ligand_clu = NULL,
+  ligand = "all",
+  receptor_clu = NULL,
+  receptor = "all",
+  top_path_number = 3,
+  show_text_cutoff = 0,
+  node_size_min = 5,
+  node_size_max = 10,
+  text_size = 3,
+  text_col = "black",
+  edge_width = 0.5,
+  edge_col = "black",
+  edge_alpha = 0.2
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}
@@ -15,10 +29,18 @@ PlotPathwayNet(clu_pairs = NULL, show_sig = F, show_clu_node = T,
 \item{show_sig}{Whether to show significant highly expressed LR pairs between pairwise clusters. Default is FALSE
 To show significant LR pairs, please run \code{\link{PairsSig}}}
 
-\item{show_clu_node}{Whether to show cluster nodes. Default is TRUE}
-
 \item{layout}{Layout of net plot, e.g., 'fr','mds',''randomly','dh',
 'gem','graphopt','grid','sphere','kk','lgl'. Default is 'nicely'}
+
+\item{ligand_clu}{Cluster of the ligand, e.g., '1'}
+
+\item{ligand}{Ligand gene name, e.g., 'App'}
+
+\item{receptor_clu}{Cluster of the receptor, e.g., '2'}
+
+\item{receptor}{Receptor gene name, e.g., 'Notch2'.}
+
+\item{top_path_number}{Number of top pathways for ligand or receptor. Default is 3}
 
 \item{show_text_cutoff}{Cutoff to show text label. Default is 0, namely to show all texts}
 
@@ -41,10 +63,31 @@ A net plot of pathways between pairwise clusters.
 L, means ligand;R, means receptor. Size of node is the mean expression of this gene in this cluster
 }
 \description{
-Plot pathways between pairwise clusters with a net plot of pathways between pairwise clusters
+Plot pathways of target cluster from source cluster with a net plot
 }
 \examples{
 clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
 
-PlotPathwayNet(clu_pairs = clu_pairs, show_sig = F)
+PlotPathwayNet(clu_pairs = clu_pairs,
+               ligand_clu = '1',
+               receptor_clu = '2')
+
+PlotPathwayNet(clu_pairs = clu_pairs,
+               ligand_clu = '1',
+               ligand = 'App',
+               receptor_clu = '2',
+               receptor = 'all')
+
+PlotPathwayNet(clu_pairs = clu_pairs,
+               ligand_clu = '1',
+               ligand = 'App',
+               receptor_clu = '2',
+               receptor = 'Notch2')
+
+PlotPathwayNet(clu_pairs = clu_pairs,
+               ligand_clu = '1',
+               ligand = 'App',
+               receptor_clu = '2',
+               receptor = c('Notch2','Tspan12'))
+
 }

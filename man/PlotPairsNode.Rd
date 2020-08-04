@@ -4,9 +4,15 @@
 \alias{PlotPairsNode}
 \title{Plot LR pairs between pairwise clusters}
 \usage{
-PlotPairsNode(clu_pairs = NULL, show_sig = F, edge_width = 1,
-  edge_alpha = 0.5, node_size_min = 1, node_size_max = 10,
-  text_size = 3)
+PlotPairsNode(
+  clu_pairs = NULL,
+  show_sig = F,
+  edge_width = 1,
+  edge_alpha = 0.5,
+  node_size_min = 1,
+  node_size_max = 10,
+  text_size = 3
+)
 }
 \arguments{
 \item{clu_pairs}{A list generated from \code{\link{FindPairs}}}

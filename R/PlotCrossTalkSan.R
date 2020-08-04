@@ -53,8 +53,7 @@ PlotCrossTalkSan <- function(clu_pairs = NULL, show_type = NULL, show_sig = F) {
             plot_res <- rbind(plot_res1, plot_res2)
         }
         if (show_sig == T) {
-            clu_crosstalk <- clu_crosstalk[clu_crosstalk$LR_number_type == "Significant", 
-                ]
+            clu_crosstalk <- clu_crosstalk[clu_crosstalk$LR_number_type == "Significant", ]
             if (nrow(clu_crosstalk) == 0) {
                 stop("No significant crosstalk in clu_pairs")
             }
@@ -133,9 +132,8 @@ PlotCrossTalkSan <- function(clu_pairs = NULL, show_type = NULL, show_sig = F) {
     }
     y_title <- paste0("Sum of LR pairs ", show_type)
     colnames(plot_res)[1] <- "LR"
-    ggplot(plot_res, aes(x = Crosstalk, y = LR, stratum = cluster, alluvium = group, fill = cluster, 
-        label = cluster)) + geom_flow(alpha = 0.7, width = 0.25, color = "darkgray") + geom_stratum(alpha = 1, 
-        width = 0.25) + geom_text(stat = "stratum", size = 3.5, angle = 0) + scale_fill_manual(values = plot_clu_col) + 
-        ylab(y_title) + theme_test() + theme(legend.position = "none", axis.text.y = element_blank(), 
-        axis.line = element_blank(), axis.ticks = element_blank())
+    ggplot(plot_res, aes(x = Crosstalk, y = LR, stratum = cluster, alluvium = group, fill = cluster, label = cluster)) + 
+        geom_flow(alpha = 0.7, width = 0.25, color = "darkgray") + geom_stratum(alpha = 1, width = 0.25) + geom_text(stat = "stratum", 
+        size = 3.5, angle = 0) + scale_fill_manual(values = plot_clu_col) + ylab(y_title) + theme_test() + theme(legend.position = "none", 
+        axis.text.y = element_blank(), axis.line = element_blank(), axis.ticks = element_blank())
 }

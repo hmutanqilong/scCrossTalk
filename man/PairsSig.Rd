@@ -12,15 +12,16 @@ PairsSig(clu_pairs = NULL, per_num = 1000, pvalue = 0.05)
 \item{per_num}{Number of repeat times for permutation test. Default is 1000}
 
 \item{pvalue}{Include the significantly highly expressed LR pairs
-with this cutoff of p value from permutation test. Default is \code{0.05}.}
+with this cutoff of p value from permutation test. Default is 0.05}
 }
 \value{
 The same list containing the significant LR pairs stored
-in \code{clu_pairs}. For p value, 0 means p < 1/per_num, namely p < 0.001 by default.
+in \code{clu_pairs}. For p value, 0 means p < 1/per_num, namely p < 0.001 by default
 }
 \description{
 Find significantly highly expressed LR pairs for pairwise clusters
 }
 \examples{
-clu_pairs <- PairsSig(clu_pairs = FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse'))
+clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
+clu_pairs <- PairsSig(clu_pairs = clu_pairs, per_num = 100)
 }

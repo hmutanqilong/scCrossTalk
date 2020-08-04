@@ -21,8 +21,8 @@
 #' @importFrom igraph graph_from_data_frame
 #' @export PlotPairsNode
 
-PlotPairsNode <- function(clu_pairs = NULL, show_sig = F, edge_width = 1, edge_alpha = 0.5, 
-    node_size_min = 1, node_size_max = 10, text_size = 3) {
+PlotPairsNode <- function(clu_pairs = NULL, show_sig = F, edge_width = 1, edge_alpha = 0.5, node_size_min = 1, node_size_max = 10, 
+    text_size = 3) {
     # check
     if (is.null(clu_pairs)) {
         stop("Please input the list from the function of FindPairs")
@@ -58,10 +58,8 @@ PlotPairsNode <- function(clu_pairs = NULL, show_sig = F, edge_width = 1, edge_a
     if (text_size < 0 | !is.numeric(text_size)) {
         stop("Please input the right text_size (number, > 0)")
     }
-    res_pairs$ligand_gene_symbol <- paste0(res_pairs$ligand_gene_symbol, "(", res_pairs$ligand_clu, 
-        "L)")
-    res_pairs$receptor_gene_symbol <- paste0(res_pairs$receptor_gene_symbol, "(", res_pairs$receptor_clu, 
-        "R)")
+    res_pairs$ligand_gene_symbol <- paste0(res_pairs$ligand_gene_symbol, "(", res_pairs$ligand_clu, "L)")
+    res_pairs$receptor_gene_symbol <- paste0(res_pairs$receptor_gene_symbol, "(", res_pairs$receptor_clu, "R)")
     pairs_sig <- 1:nrow(res_pairs)
     if (show_sig == T) {
         pairs_sig <- which(res_pairs$type == "Significant")
@@ -121,15 +119,12 @@ PlotPairsNode <- function(clu_pairs = NULL, show_sig = F, edge_width = 1, edge_a
         plot_clu_col <- c(plot_clu_col, plot_clu_col1)
     }
     mygraph <- graph_from_data_frame(plot_res_con, vertices = plot_res, directed = FALSE)
-    ggraph(mygraph, layout = "linear", circular = TRUE) + geom_edge_arc(aes(edge_colour = cluster), 
-        edge_alpha = edge_alpha, edge_width = edge_width) + geom_node_point(aes(size = size, 
-        fill = cluster), shape = 21, color = "black", alpha = 0.9) + scale_size_continuous(range = c(node_size_min, 
-        node_size_max)) + scale_fill_manual(values = plot_clu_col) + geom_node_text(aes(x = x * 
-        1.06, y = y * 1.06, label = name, angle = angle, hjust = hjust, color = cluster), 
-        size = text_size) + scale_color_manual(values = plot_clu_col) + scale_edge_color_manual(values = plot_clu_col) + 
-        expand_limits(x = c(-1.6, 1.6), y = c(-1.6, 1.6)) + coord_fixed() + theme_minimal() + 
-        theme(legend.position = "none", panel.grid = element_blank(), axis.line = element_blank(), 
-            axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), 
-            plot.margin = unit(c(0, 0, 0, 0), "null"), panel.spacing = unit(c(0, 0, 0, 0), 
-                "null"))
+    ggraph(mygraph, layout = "linear", circular = TRUE) + geom_edge_arc(aes(edge_colour = cluster), edge_alpha = edge_alpha, 
+        edge_width = edge_width) + geom_node_point(aes(size = size, fill = cluster), shape = 21, color = "black", alpha = 0.9) + 
+        scale_size_continuous(range = c(node_size_min, node_size_max)) + scale_fill_manual(values = plot_clu_col) + geom_node_text(aes(x = x * 
+        1.06, y = y * 1.06, label = name, angle = angle, hjust = hjust, color = cluster), size = text_size) + scale_color_manual(values = plot_clu_col) + 
+        scale_edge_color_manual(values = plot_clu_col) + expand_limits(x = c(-1.6, 1.6), y = c(-1.6, 1.6)) + coord_fixed() + 
+        theme_minimal() + theme(legend.position = "none", panel.grid = element_blank(), axis.line = element_blank(), 
+        axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), plot.margin = unit(c(0, 
+            0, 0, 0), "null"), panel.spacing = unit(c(0, 0, 0, 0), "null"))
 }

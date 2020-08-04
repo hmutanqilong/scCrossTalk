@@ -12,7 +12,7 @@ CrossTalkSig(clu_pairs = NULL, per_num = 1000, pvalue = 0.05)
 \item{per_num}{Number of repeat times for permutation test. Default is 1000}
 
 \item{pvalue}{Include the significantly cell-cell communications
-with this cutoff of p value from permutation test. Default is \code{0.05}.}
+with this cutoff of p value from permutation test. Default is 0.05}
 }
 \value{
 The same list containing the significant cell-cell communications stored
@@ -22,5 +22,6 @@ in \code{clu_clu_num} and in \code{clu_clu_score}. For p value, 0 means p < 1/pe
 Find significant crosstalk between pairwise clusters with permutation test, which might take a long time.
 }
 \examples{
-clu_pairs <- CrossTalkSig(clu_pairs = FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse'))
+clu_pairs <- clu_pairs <- FindPairs(object = mouse_kidney_203_Seurat,species = 'Mouse')
+clu_pairs <- CrossTalkSig(clu_pairs = clu_pairs, per_num = 100)
 }

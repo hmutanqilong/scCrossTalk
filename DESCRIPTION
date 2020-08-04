@@ -9,7 +9,7 @@ Description: Infer cell-cell communications based on CellTalkDB
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Imports: 
     Seurat (>= 3.0.0),
     progress,
@@ -20,4 +20,13 @@ Imports:
     ggpubr,
     scales,
     pheatmap,
-    corrplot
+    corrplot,
+    circlize,
+    ggalluvial,
+    ggraph,
+    ggrepel,
+    igraph
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
